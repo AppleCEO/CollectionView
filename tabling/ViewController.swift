@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     self.collectionView.dataSource = collectionViewDataSource
     parsingAPI()
   }
-
+  
   private func makeLayout() -> UICollectionViewLayout {
     let layout = UICollectionViewFlowLayout()
     layout.itemSize = .init(width: view.bounds.width / 2, height: view.bounds.width / 2)
@@ -36,18 +36,18 @@ class ViewController: UIViewController {
     request.httpMethod = "GET"
     
     let task = session.dataTask(with: request, completionHandler: { (data, response, error) -> Void in
-        guard let data = data else {
-            print("load data failed")
-            return
+      guard let data = data else {
+        print("load data failed")
+        return
+      }
+      do {
+        self.collectionViewDataSource.model = try JSONDecoder().decode(Model.self, from: data)
+        DispatchQueue.main.async {
+          self.collectionView.reloadData()
         }
-        do {
-            self.collectionViewDataSource.model = try JSONDecoder().decode(Model.self, from: data)
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
+      } catch {
+        print(error.localizedDescription)
+      }
     })
     task.resume()
   }

@@ -16,13 +16,13 @@ class CollectionViewCell: UICollectionViewCell {
   }
   
   func downloadImage(from url: String) {
-      let url = URL(string: url)
-
-      DispatchQueue.global().async {
-          let data = try? Data(contentsOf: url!)
-          DispatchQueue.main.async {
-            self.imageView.image = UIImage(data: data!)
-          }
+    let url = URL(string: url)
+    
+    DispatchQueue.global().async {
+      let data = try? Data(contentsOf: url!)
+      DispatchQueue.main.async {
+        self.imageView.image = UIImage(data: data!)
       }
+    }
   }
 }

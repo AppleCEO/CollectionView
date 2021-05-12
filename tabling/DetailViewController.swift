@@ -16,7 +16,7 @@ class DetailViewController: UIViewController {
     
     // Do any additional setup after loading the view.
   }
-
+  
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
@@ -27,12 +27,12 @@ class DetailViewController: UIViewController {
   
   private func downloadImage(from url: String) {
     let url = URL(string: url)
-
+    
     DispatchQueue.global().async {
-        let data = try? Data(contentsOf: url!)
-        DispatchQueue.main.async {
-          self.imageView.image = UIImage(data: data!)
-        }
+      let data = try? Data(contentsOf: url!)
+      DispatchQueue.main.async {
+        self.imageView.image = UIImage(data: data!)
+      }
     }
   }
 }

@@ -20,6 +20,4 @@ class CollectionViewDataSource: NSObject, UICollectionViewDataSource {
     cell.imageURL = model[indexPath.row].downloadURL
     return cell
   }
-  
-  
 }
