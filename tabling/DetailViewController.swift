@@ -34,5 +34,5 @@ class DetailViewController: UIViewController {
           self.imageView.image = UIImage(data: data!)
         }
     }
-}
+  }
 }
