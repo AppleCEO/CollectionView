@@ -40,6 +40,7 @@ class CustomCollectionViewController: UIViewController {
         collectionView.delegate = self
         
         collectionView.register(MyCollectionViewCell.self, forCellWithReuseIdentifier: MyCollectionViewCell.id)
+        collectionView.register(MyCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MyCollectionViewHeader.id)
         
         return collectionView
     }()
@@ -84,9 +85,22 @@ extension CustomCollectionViewController: UICollectionViewDataSource {
         return cell ?? .init()
     }
     
-    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        switch kind {
+        case UICollectionView.elementKindSectionHeader:
+            let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MyCollectionViewHeader.id, for: indexPath) as? MyCollectionViewHeader
+            headerView?.titleLabel.text = "헤더 \(indexPath.row)"
+            return headerView ?? .init()
+        default: return .init()
+        }
+    }
 }
 
 extension CustomCollectionViewController: UICollectionViewDelegateFlowLayout {
-    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let width = collectionView.bounds.width
+        let height = 40.0
+        
+        return CGSize(width: width, height: height)
+    }
 }
