@@ -8,20 +8,20 @@
 import UIKit
 
 private enum Const {
-    static let cellWidth: CGFloat = 100.0
-    static let cellHeight: CGFloat = 100.0
+    static let cellWidth: CGFloat = UIScreen.main.bounds.width
+    static let cellHeight: CGFloat = 600.0
     
-    static let lineSpacing: CGFloat = 10.0
-    static let itemSpacing: CGFloat = 10.0
+    static let lineSpacing: CGFloat = 0.0
+    static let itemSpacing: CGFloat = 0.0
     
-    static let sectionInsetLeft: CGFloat = 20.0
-    static let sectionInsetRight: CGFloat = 20.0
+    static let sectionInsetLeft: CGFloat = 0.0
+    static let sectionInsetRight: CGFloat = 0.0
 }
 
 class CustomCollectionViewController: UIViewController {
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .vertical
+        layout.scrollDirection = .horizontal
         layout.itemSize = .init(width: Const.cellWidth, height: Const.cellHeight)
         layout.minimumLineSpacing = Const.lineSpacing
         layout.minimumInteritemSpacing = Const.itemSpacing
@@ -38,6 +38,7 @@ class CustomCollectionViewController: UIViewController {
         
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.isPagingEnabled = true
         
         collectionView.register(MyCollectionViewCell.self, forCellWithReuseIdentifier: MyCollectionViewCell.id)
         collectionView.register(MyCollectionViewHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: MyCollectionViewHeader.id)
